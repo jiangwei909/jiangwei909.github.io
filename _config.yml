@@ -16,7 +16,7 @@
 title: 河蟹歌客
 email: 
 description: > # this means to ignore newlines until "baseurl:"
-  技术，需要舒服的姿势
+  技术交流，需要舒服的姿势
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://hexogeek.com" # the base hostname & protocol for your site, e.g. http://example.com
 
