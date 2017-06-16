@@ -1,0 +1,71 @@
+---
+title: 为了安全你得付出10倍的性能代价
+date: 2017-06-13 22:49:31
+categories: 计算机技术
+tags:
+ - nginx
+ - ssl
+---
+
+
+很多专家都说，为了网站安全，你应该使用https。看看现在的阿里、百度、腾讯，他们都已经用上了高大上的https，你还有什么理由不用呢？
+嗯，安全很美妙，很诱人，但所有的专家都在有意的回避一个问题，那就是安全的https性能怎么样?如果我说https的性能要慢上10倍，对，就是10倍，你会相信吗？不管你信不信，我反正信。
+
+<!-- more -->
+
+下面就用实际数据来说明一下，nginx，最基本html页面.使用apache benchmark测试
+
+	$ ab -n 100000 -c 100 http://192.168.1.22:1080/
+
+结果如下:
+
+	Server Software:        nginx/1.10.2
+	Server Hostname:        192.168.1.22
+	Server Port:            1080
+
+	Document Path:          /
+	Document Length:        3698 bytes
+
+	Concurrency Level:      100
+	Time taken for tests:   30.652 seconds
+	Complete requests:      100000
+	Failed requests:        0
+	Total transferred:      393200000 bytes
+	HTML transferred:       369800000 bytes
+	Requests per second:    3262.43 [#/sec] (mean)
+	Time per request:       30.652 [ms] (mean)
+	Time per request:       0.307 [ms] (mean, across all concurrent requests)
+	Transfer rate:          12527.21 [Kbytes/sec] received
+
+简单的说，就是每秒能处理3262.43次请求。
+
+nginx启用ssl后，也就是采用https后，用apache benchmark再测一下
+
+	$ ab -n 10000 -c 100 https://192.168.1.22:1080/
+
+结果如下:
+
+	Server Software:        nginx/1.10.2
+	Server Hostname:        192.168.1.22
+	Server Port:            1080
+	SSL/TLS Protocol:       TLSv1.2,ECDHE-RSA-AES256-GCM-SHA384,1024,256
+
+	Document Path:          /
+	Document Length:        3698 bytes
+
+	Concurrency Level:      100
+	Time taken for tests:   29.730 seconds
+	Complete requests:      10000
+	Failed requests:        0
+	Total transferred:      39320000 bytes
+	HTML transferred:       36980000 bytes
+	Requests per second:    336.36 [#/sec] (mean)
+	Time per request:       297.301 [ms] (mean)
+	Time per request:       2.973 [ms] (mean, across all concurrent requests)
+	Transfer rate:          1291.57 [Kbytes/sec] received
+
+什么情况呢，这里的Requests per second才336.36，也就是每秒处理336.36次。和http相比，差距是
+
+	3262.43 / 336.36 = 9.699
+	
+四舍五入就10倍了. 在把http换到https前，看来得先升级服务器咯!
