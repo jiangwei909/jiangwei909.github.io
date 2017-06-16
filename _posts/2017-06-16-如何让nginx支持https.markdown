@@ -13,37 +13,37 @@ https会导致站点性能下降，但如果安全摆在首位，或者你是土
 
 1. 创建网站证书存放目录
 
-	$ mkdir /usr/local/nginx/conf/ssl
-	$ cd /usr/local/nginx/conf/ssl
+		$ mkdir /usr/local/nginx/conf/ssl
+		$ cd /usr/local/nginx/conf/ssl
 
 2. 制作CA证书
 
-	$ openssl genrsa -des3 -out ca.key 2048
-	$ openssl req -new -x509 -days 7305 -key ca.key -out ca.crt
+		$ openssl genrsa -des3 -out ca.key 2048
+		$ openssl req -new -x509 -days 7305 -key ca.key -out ca.crt
 
 3. 生成nginx服务器所需证书，并用CA签名
 
-	$ openssl genrsa -des3 -out client.key 1024
-	$ openssl req -new -key client.key -out client.csr
-	$ openssl x509 -req -in client.csr -out client.pem -signkey client.key -CA ca.crt -CAkey ca.key -CAcreateserial -days 3650
+		$ openssl genrsa -des3 -out client.key 1024
+		$ openssl req -new -key client.key -out client.csr
+		$ openssl x509 -req -in client.csr -out client.pem -signkey client.key -CA ca.crt -CAkey ca.key -CAcreateserial -days 3650
 
 4. 查看证书文件
 
-	$ pwd
-	/usr/local/nginx/conf/ssl
-	$ ls
-	ca.crt  ca.key  ca.srl  client.csr  client.key  client.pem
+		$ pwd
+		/usr/local/nginx/conf/ssl
+		$ ls
+		ca.crt  ca.key  ca.srl  client.csr  client.key  client.pem
 
 5. 修改nginx配置
 在配置文件中增加
 
-	ssl                  on;
-	ssl_certificate      /usr/local/nginx/conf/ssl/client.pem;
-	ssl_certificate_key  /usr/local/nginx/conf/ssl/client.key;
+		ssl                  on;
+		ssl_certificate      /usr/local/nginx/conf/ssl/client.pem;
+		ssl_certificate_key  /usr/local/nginx/conf/ssl/client.key;
 		 
 6. 重新启动nginx
    
-   $nginx -s reload
+		$nginx -s reload
    
 哦，表面上一切正常，可是如果查看日志的话，你会发现类似下面的错误
 
