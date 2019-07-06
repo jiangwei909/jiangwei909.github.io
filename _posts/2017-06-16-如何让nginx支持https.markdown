@@ -1,6 +1,6 @@
 ---
 title: 如何让nginx支持https
-date: 2017-06-16 09:14:21
+date: 2017-06-16 09:14:21 +0800
 categories: 计算机技术
 tags:
  - nginx
