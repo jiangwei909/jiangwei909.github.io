@@ -30,3 +30,12 @@ exclude:
   - Gemfile
   - Gemfile.lock
 timezone: Asia/Shanghai
+
+comments:
+  gitalk: true
+  gitalk_clientID: '7391896ed28051c292ba'
+  gitalk_Secret: '391d4f36077c89a1d7ab586447972478defcf30d'
+  gitalk_repo: 'jiangwei909.github.io'
+  gitalk_owner: 'jiangwei909'
+  gitalk_admin: 'jiangwei909'
+  distractionFreeMode: true
