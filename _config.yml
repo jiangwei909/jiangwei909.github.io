@@ -24,7 +24,7 @@ url: "http://hexogeek.com" # the base hostname & protocol for your site, e.g. ht
 markdown: kramdown
 theme: minima
 #theme: jekyll-theme-slate
-gems:
+plugins:
   - jekyll-feed
 exclude:
   - Gemfile
