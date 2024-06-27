@@ -13,9 +13,9 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Wj的网站
+title: Jiangwei909的网站
 email: 
-description: 这是Wj我的网站，注意，是‘我’的，而不是'我们'的
+description: Jiangwei909的网站
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://jiangwei909.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 
